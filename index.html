@@ -45,17 +45,31 @@
   /* ── SIDEBAR ── */
   .layout {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 280px minmax(0, 1fr);
     min-height: 100vh;
-    position: relative; z-index: 1;
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 0;
   }
+
 
   aside {
     background: var(--teal);
     padding: 60px 32px 60px 36px;
-    position: sticky; top: 0; height: 100vh; overflow-y: auto;
-    display: flex; flex-direction: column; gap: 40px;
-    scrollbar-width: none;
+    border-right: 1px solid rgba(255,255,255,0.08);
+
+    position: sticky;
+    top: 0;
+    align-self: start;
+
+    height: 100vh;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
   }
   aside::-webkit-scrollbar { display: none; }
 
@@ -137,10 +151,12 @@
 
   /* ── MAIN CONTENT ── */
   main {
+    background: transparent;
     padding: 60px 64px 80px 64px;
-    max-width: 860px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
   }
-
   /* ── HERO ── */
   .hero {
     margin-bottom: 56px;
@@ -265,6 +281,9 @@
   .edu-year { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 4px; }
   .edu-note { font-size: 12px; color: var(--mid); margin-top: 6px; line-height: 1.5; }
 
+  .exp-card, .edu-card {
+  backdrop-filter: blur(6px);
+  }
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
@@ -278,10 +297,24 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .layout { grid-template-columns: 1fr; }
-    aside { position: static; height: auto; padding: 40px 28px; }
-    main { padding: 40px 28px 60px; }
-    .hero-name { font-size: 36px; }
+    .layout {
+      grid-template-columns: 1fr;
+    }
+
+    aside {
+      position: relative;
+      height: auto;
+      overflow: visible;
+      border-right: none;
+    }
+
+    main {
+      padding: 40px 28px 60px;
+    }
+
+    .hero-name {
+      font-size: 36px;
+    }
   }
 
   /* -- QR CODE --*/
