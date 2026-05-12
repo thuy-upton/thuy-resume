@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Thuy Upton</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal:       #0D7377;
+    --teal-light: #14A085;
+    --teal-dim:   #0a5457;
+    --gold:       #C9A84C;
+    --cream:      #F8F5EF;
+    --ink:        #1A1A1A;
+    --mid:        #3D3D3D;
+    --muted:      #7A7A7A;
+    --rule:       #D8CFC0;
+    --bg:         #FDFAF5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 10% 0%, rgba(13,115,119,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 95% 100%, rgba(201,168,76,0.05) 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── SIDEBAR ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+    position: relative; z-index: 1;
+  }
+
+  aside {
+    background: var(--teal);
+    padding: 60px 32px 60px 36px;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 40px;
+    scrollbar-width: none;
+  }
+  aside::-webkit-scrollbar { display: none; }
+
+  /* ── PROFILE PHOTO ── */
+  .profile-photo {
+    width: 72px;
+    height: 72px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.1s forwards;
+  }
+
+  .profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.4);
+    display: block;
+  }
+
+  .aside-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: #fff; line-height: 1.2;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .aside-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; font-weight: 400;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin-top: 6px;
+    opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+  }
+
+  /* ── SIDEBAR CONTACT ── */
+  .side-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .contact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .contact-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    opacity: 0; animation: fadeUp 0.8s calc(0.45s + var(--d, 0s)) forwards;
+  }
+  .contact-list .icon {
+    width: 18px; flex-shrink: 0;
+    color: var(--gold); font-size: 13px; margin-top: 1px;
+  }
+  .contact-list span {
+    font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.5;
+  }
+
+  /* ── SIDEBAR SKILLS ── */
+  .skill-group { opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+  .skill-item { margin-bottom: 12px; }
+  .skill-label {
+    font-size: 11px; color: rgba(255,255,255,0.7);
+    margin-bottom: 5px; display: flex; justify-content: space-between;
+  }
+  .skill-bar {
+    height: 2px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden;
+  }
+  .skill-fill {
+    height: 100%; background: var(--gold); border-radius: 2px;
+    width: 0; transition: width 1.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ── SIDEBAR CERTS ── */
+  .cert-list { list-style: none; display: flex; flex-direction: column; gap: 8px; opacity: 0; animation: fadeUp 0.8s 0.9s forwards; }
+  .cert-list li { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.45; padding-left: 12px; position: relative; }
+  .cert-list li::before { content: '◆'; position: absolute; left: 0; color: var(--gold); font-size: 7px; top: 3px; }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    padding: 60px 64px 80px 64px;
+    max-width: 860px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 40px;
+    opacity: 0; animation: fadeUp 0.9s 0.15s forwards;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 12px;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 900; line-height: 1;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .hero-name span { color: var(--teal); }
+  .hero-summary {
+    font-size: 15px; line-height: 1.75;
+    color: var(--mid); max-width: 640px;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;
+  }
+  .tag {
+    background: rgba(13,115,119,0.08);
+    border: 1px solid rgba(13,115,119,0.2);
+    color: var(--teal-dim);
+    font-size: 11px; font-weight: 500;
+    padding: 4px 12px; border-radius: 20px;
+    font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+  }
+
+  /* ── SECTION ── */
+  section { margin-bottom: 52px; opacity: 0; animation: fadeUp 0.8s calc(var(--sd, 0.3s)) forwards; }
+  .section-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--teal); white-space: nowrap;
+  }
+  .section-rule { flex: 1; height: 1px; background: var(--rule); }
+
+  /* ── EXPERIENCE CARD ── */
+  .exp-card {
+    position: relative;
+    padding: 24px 28px 24px 28px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .exp-card:hover {
+    border-color: rgba(13,115,119,0.2);
+    box-shadow: 0 4px 24px rgba(13,115,119,0.07), 0 1px 4px rgba(0,0,0,0.04);
+    background: #fffffe;
+  }
+  .exp-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--teal);
+    border-radius: 4px 0 0 4px;
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .exp-card:hover::before { transform: scaleY(1); }
+
+  .exp-meta {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 6px; margin-bottom: 6px;
+  }
+  .exp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 700; color: var(--ink);
+  }
+  .exp-dates {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; color: var(--muted); letter-spacing: 0.08em;
+    white-space: nowrap; padding-top: 3px;
+  }
+  .exp-org {
+    font-size: 12px; color: var(--teal); font-weight: 500;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .exp-bullets li {
+    font-size: 13.5px; line-height: 1.65; color: var(--mid);
+    padding-left: 16px; position: relative;
+  }
+  .exp-bullets li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 5px; height: 1px; background: var(--teal);
+  }
+
+  /* ── EDUCATION CARD ── */
+  .edu-card {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 20px 24px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    margin-bottom: 14px;
+    border-left: 3px solid var(--gold);
+  }
+  .edu-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: rgba(201,168,76,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .edu-degree { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--ink); }
+  .edu-school { font-size: 12px; color: var(--teal); font-weight: 500; margin-top: 3px; }
+  .edu-year { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 4px; }
+  .edu-note { font-size: 12px; color: var(--mid); margin-top: 6px; line-height: 1.5; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; padding: 40px 28px; }
+    main { padding: 40px 28px 60px; }
+    .hero-name { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside>
+    <div>
+          <div class="profile-photo">
+            <img src="images/me.png" alt="Thuy Upton">
+          </div>
+      <div class="aside-name" style="margin-top:16px">Thuy Upton</div>
+      <div class="aside-title">Healthcare IT · Systems Analyst</div>
+    </div>
+
+    <div>
+      <div class="side-section-label">Contact</div>
+      <ul class="contact-list">
+        <li style="--d:0s"><span class="icon">📍</span><span>Fort Worth, TX</span></li>
+        <li style="--d:0.05s"><span class="icon">✉</span><span>thuyupton@gmail.com</span></li>
+        <li style="--d:0.1s"><span class="icon">📞</span><span>(817) 733-7511</span></li>
+        <li style="--d:0.15s"><span class="icon">🔗</span><span>https://www.linkedin.com/in/thuy-upton/</span></li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <div class="side-section-label">Technical Skills</div>
+      <div class="skill-item">
+        <div class="skill-label"><span>HTML / CSS / JS</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-w="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span>React / Node.js</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-w="75"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span>SQL / Data Integration</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-w="65"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span>Pyxis ADC Systems</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-w="95"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span>Project Coordination</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-w="80"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span>UAT & Documentation</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-w="78"></div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="side-section-label">Certifications</div>
+      <ul class="cert-list">
+        <li>CPhT — PTCB</li>
+        <li>Sterile Products Cert — NPTA</li>
+        <li>Registered PharmTech — TX</li>
+        <li>Registered PharmTech — AR</li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- ══ MAIN ══ -->
+  <main>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-eyebrow">Enterprise Application Analyst Candidate</div>
+      <h1 class="hero-name">Thuy Upton</h1>
+      <p class="hero-summary">
+        Healthcare IT professional with 10+ years in clinical pharmacy — including a current role at <strong>Children's Health</strong> — combined with full-stack engineering training and project coordination experience. I bridge the gap between clinical workflows and technology: translating complex requirements into system solutions and supporting end-users.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">Production Support</span>
+        <span class="tag">Requirements Analysis</span>
+        <span class="tag">Stakeholder Communication</span>
+        <span class="tag">Healthcare Systems</span>
+        <span class="tag">Project Management</span>
+        <span class="tag">Front-End Dev</span>
+        <span class="tag">UAT</span>
+        <span class="tag">Children's Health</span>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <section style="--sd: 0.4s">
+      <div class="section-header">
+        <div class="section-label">Experience</div>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-title">IVR Tech / Pharmacy Technician III</div>
+          <div class="exp-dates">Aug 2025 – Present</div>
+        </div>
+        <div class="exp-org">Children's Health</div>
+        <ul class="exp-bullets">
+          <li>Compound sterile IV preparations for pediatric and neonatal patients within one of the nation's leading children's health systems, adhering strictly to USP &lt;797&gt; sterile compounding standards.</li>
+          <li>Deep institutional knowledge of Children's Health IVR workflows and departmental structures.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-title">IT Consultant — Front-End & Project Support</div>
+          <div class="exp-dates">Aug – Oct 2025</div>
+        </div>
+        <div class="exp-org">Honeydew Consulting (Epic Consulting Group)</div>
+        <ul class="exp-bullets">
+          <li>Served as primary front-end developer for a client-facing timekeeping application; built and iterated on UI components to meet evolving user requirements.</li>
+          <li>Assisted the Project Manager in coordinating team deliverables, facilitating status meetings, tracking milestones, and maintaining project documentation.</li>
+          <li>Collaborated with the backend engineer to map and port data from web application front end into Excel-based reporting outputs, ensuring data integrity across the integration.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-title">Pharmacy Technician — Overnights</div>
+          <div class="exp-dates">Jun 2022 – Present</div>
+        </div>
+        <div class="exp-org">Texas Health Resources</div>
+        <ul class="exp-bullets">
+          <li>Manage all overnight pharmacy operations including adult, NICU, and chemo IV compounding; Pyxis fills to OR, Endo, Cath Lab, and Radiology.</li>
+          <li>Administer and troubleshoot Pyxis automated dispensing cabinets — granting staff access, resolving system failures, and escalating issues, directly mirroring IT production support responsibilities.</li>
+          <li>Maintain emergency medication readiness: crash carts, stroke boxes, M.I. boxes; receive and document controlled substance deliveries.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-title">Pharmacy Technician — PRN</div>
+          <div class="exp-dates">May 2023 – Present</div>
+        </div>
+        <div class="exp-org">Medical City Alliance</div>
+        <ul class="exp-bullets">
+          <li>Per-diem pharmacy support including IV compounding, Pyxis operations, crash cart maintenance, and unit dose pre-packing.</li>
+          <li>Deliver professional support to clinical nursing staff for pharmaceutical inquiries</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-title">Pharmacy Technician II / Assistant Buyer</div>
+          <div class="exp-dates">Oct 2016 – May 2022</div>
+        </div>
+        <div class="exp-org">Medical City North Hills</div>
+        <ul class="exp-bullets">
+          <li>Dual role managing full pharmacy operations and pharmaceutical procurement — ordering medications and supplies, managing recalled product removal, processing interdepartmental billing, and coordinating supplier returns.</li>
+          <li>Audited anesthesia narcotic waste documentation, ensuring regulatory compliance.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-title">OR Pharmacy Technician</div>
+          <div class="exp-dates">May 2015 – Oct 2016</div>
+        </div>
+        <div class="exp-org">JPS County Hospital</div>
+        <ul class="exp-bullets">
+          <li>Managed all pharmaceutical needs within the Perioperative Department; audited controlled substance waste documentation and narcotic reconciliation.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- EDUCATION -->
+    <section style="--sd: 0.55s">
+      <div class="section-header">
+        <div class="section-label">Education</div>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-icon">💻</div>
+        <div>
+          <div class="edu-degree">Software Engineering Bootcamp</div>
+          <div class="edu-school">Springboard</div>
+          <div class="edu-year">2022 – 2024</div>
+          <div class="edu-note">Full-stack curriculum: HTML, CSS, JavaScript, React, Node.js, Python, SQL, RESTful APIs, Git. Capstone projects required requirements analysis, iterative build/test cycles, and deployment.</div>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-degree">B.A. History — Minor in Business Administration</div>
+          <div class="edu-school">University of Texas at Austin</div>
+          <div class="edu-year">1998 – 2004</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Animate skill bars on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.skill-fill').forEach(el => {
+        el.style.width = el.dataset.w + '%';
+      });
+    }, 800);
+  });
+</script>
+</body>
+</html>
