@@ -296,43 +296,36 @@
   ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .layout {
-      grid-template-columns: 1fr;
-    }
+@media print {
 
-    aside {
-      position: relative;
-      height: auto;
-      overflow: visible;
-      border-right: none;
-    }
-
-    main {
-      padding: 40px 28px 60px;
-    }
-
-    .hero-name {
-      font-size: 36px;
-    }
+  /* kill sticky sidebar behavior */
+  aside {
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
+    page-break-after: auto;
   }
 
-  /* -- QR CODE --*/
-    .qr-section {
-      margin-top: 24px;
-      text-align: center;
-    }
+  .layout {
+    display: block !important;
+  }
 
-    .qr-section img {
-      width: 90px;
-      height: 90px;
-    }
+  aside > div:first-child {
+    page-break-after: always;
+  }
 
-    .qr-section p {
-      font-size: 12px;
-      opacity: 0.7;
-      margin-top: 8px;
-    }
+  .exp-card,
+  .edu-card,
+  section {
+    break-inside: avoid;
+  }
+
+  * {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+}
 </style>
 </head>
 <body>
@@ -393,7 +386,6 @@
         <li>CPhT — PTCB</li>
         <li>Sterile Products Cert — NPTA</li>
         <li>Registered PharmTech — TX</li>
-        <li>Registered PharmTech — AR</li>
       </ul>
     </div>
   </aside>
