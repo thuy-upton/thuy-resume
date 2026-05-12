@@ -324,21 +324,38 @@
     box-shadow: none;
     transform: none;
   }
+    .qr-section {
+    display: block !important;
+    margin-top: 20px;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+
+  .qr-section img {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+  }
+
+  .qr-section p {
+    font-size: 10px;
+    opacity: 0.7;
+  }
 
 }
   .qr-section {
+    display: none; /* hidden on screen, only for print */
     position: static;
     page-break-inside: avoid;
     break-inside: avoid;
     margin-top: 20px;
     transform: scale(0.85);
 
-  /* prevents it from stretching or behaving like a full-width block */
-  width: 100%;
-  max-width: 120px;
-  margin-left: auto;
-  margin-right: auto;
-}
+    width: 100%;
+    max-width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
 .qr-section img {
   width: 90px;
@@ -378,7 +395,13 @@
         <li style="--d:0s"><span class="icon">📍</span><span>Fort Worth, TX</span></li>
         <li style="--d:0.05s"><span class="icon">✉</span><span>thuyupton@gmail.com</span></li>
         <li style="--d:0.1s"><span class="icon">📞</span><span>(817) 733-7511</span></li>
-        <li style="--d:0.15s"><span class="icon">🔗</span><span>https://www.linkedin.com/in/thuy-upton/</span></li>
+        <li style="--d:0.15s"><span class="icon">🔗</span>
+          <span>
+              <a href="https://www.linkedin.com/in/thuy-upton/" target="_blank" style="color:inherit; text-decoration:none;">
+                linkedin.com/in/thuy-upton/
+              </a>
+            </span>
+        </li>
       </ul>
     </div>
 
@@ -477,12 +500,12 @@
       <div class="exp-card">
         <div class="exp-meta">
           <div class="exp-title">Pharmacy Technician — Overnights</div>
-          <div class="exp-dates">Jun 2022 – Present</div>
+          <div class="exp-dates">Jun 2022 – Aug 2025</div>
         </div>
         <div class="exp-org">Texas Health Resources</div>
         <ul class="exp-bullets">
           <li>Manage all overnight pharmacy operations including adult, NICU, and chemo IV compounding; Pyxis fills to OR, Endo, Cath Lab, and Radiology.</li>
-          <li>Administer and troubleshoot Pyxis automated dispensing cabinets — granting staff access, resolving system failures, and escalating issues, directly mirroring IT production support responsibilities.</li>
+          <li>Administer and troubleshoot Pyxis automated dispensing cabinets — granting staff access, resolving system failures, and escalating issues.</li>
           <li>Maintain emergency medication readiness: crash carts, stroke boxes, M.I. boxes; receive and document controlled substance deliveries.</li>
         </ul>
       </div>
@@ -490,7 +513,7 @@
       <div class="exp-card">
         <div class="exp-meta">
           <div class="exp-title">Pharmacy Technician — PRN</div>
-          <div class="exp-dates">May 2023 – Present</div>
+          <div class="exp-dates">May 2023 – May 2024</div>
         </div>
         <div class="exp-org">Medical City Alliance</div>
         <ul class="exp-bullets">
